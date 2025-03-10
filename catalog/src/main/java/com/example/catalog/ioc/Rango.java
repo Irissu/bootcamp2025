@@ -15,4 +15,9 @@ import lombok.NoArgsConstructor;
 public class Rango {
     private int min;
     private int max;
+
+    @Override
+    public String toString() {
+        return "Rango{" + "min=" + min +  ", max=" + max + '}';
+    }
 }
