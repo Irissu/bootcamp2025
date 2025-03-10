@@ -9,9 +9,11 @@ import com.example.catalog.ioc.Service;
 import com.example.catalog.ioc.Rango;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 //@ComponentScan(basePackages = "com.example.ioc")
+@ComponentScan(basePackages = {"com.example.catalog.ioc"})
 public class CatalogApplication implements CommandLineRunner  {
 
 	public static void main(String[] args) {
@@ -57,7 +59,7 @@ public class CatalogApplication implements CommandLineRunner  {
 //	@Bean
 //  	CommandLineRunner demo() {
 //		return (args) -> {
-//			System.err.println("Aplicacion arrancadaaaaaaaaaaaaaa");
+//			System.err.println("Aplicacion arrancada");
 //		};
 //	}
 }
