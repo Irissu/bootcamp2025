@@ -1,6 +1,7 @@
 package com.example.catalog;
 
 import com.example.catalog.ioc.Repository;
+import com.example.catalog.util.Calculadora;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,8 +42,10 @@ public class CatalogApplication implements CommandLineRunner  {
 	@Override
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicacion arrancada");
-		ejemplosIOC();
+		//ejemplosIOC();
+		ejemplosPruebas();
 	}
+
 
 	private void ejemplosIOC() {
 		//Servicio srv = new Servicio(new Repositorio(new Configuracion()));
@@ -54,6 +57,11 @@ public class CatalogApplication implements CommandLineRunner  {
 		repo2.guardar();
 		System.err.println("Valor: " + valor);
 		System.err.println("Rango: " + rango);
+	}
+
+	private void ejemplosPruebas() {
+		var calc = new Calculadora();
+		System.err.println("Suma: " + calc.suma(2, 3));
 	}
 
 //	@Bean
