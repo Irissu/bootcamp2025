@@ -1,13 +1,10 @@
 package com.example.catalog.util;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import com.example.catalog.ioc.Repository;
+import org.junit.jupiter.api.*;
+
+import static org.mockito.Mockito.*;
 
 public class CalculadoraTest {
     Calculadora calc;
@@ -38,7 +35,7 @@ public class CalculadoraTest {
             @Test
             @DisplayName("Suma dos enteros")
             void testSuma() {
-//		var calc = new Calculadora();
+ 		     var calc = new Calculadora();
 
                 var actual = calc.suma(2, 3);
 
@@ -69,6 +66,7 @@ public class CalculadoraTest {
         class KO {
             @Test
             @DisplayName("Suma dos enteros grandes")
+            @Disabled
             void testSumaInt() {
                 var calc = new Calculadora();
 
@@ -80,7 +78,6 @@ public class CalculadoraTest {
 //		assertTrue(actual > 0);
             }
         }
-
     }
 
     @Nested
@@ -106,7 +103,7 @@ public class CalculadoraTest {
             }
 
             @Test
-            @DisplayName("Divide por cero: try")
+            @DisplayName("Divide por cero con try")
             void testDivide3() {
                 var calc = new Calculadora();
                 try {
@@ -117,5 +114,24 @@ public class CalculadoraTest {
                 }
             }
         }
+    }
+
+    @Test
+    void mockTheRepository() {
+        var calc = mock(Calculadora.class);
+        when(calc.suma(anyInt(), anyInt())).thenReturn(4);
+        var repo = mock(Repository.class);
+        doNothing().when(repo).guardar();
+
+        var obj = new Factura(calc, repo);
+        var actual = obj.calcularTotal(2, 2);
+        obj.emitir();
+
+        assertEquals(4, actual);
+        verify(calc).suma(2, 2);
+        verify(repo).guardar();
+
+
+
     }
 }

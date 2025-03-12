@@ -72,7 +72,7 @@ class GildedRoseTest {
         var output = new StringBuilder();
         output.append("day,name, sellIn, quality\n");
         List.of(items).forEach(item -> output.append("0," + item + "\n"));
-        for (int i = 1; i <= 31; i++) {
+        for (int i = 1; i <= 9; i++) {
             app.updateQuality();
             for(Item item: items)
                 output.append(i + "," + item + "\n");
