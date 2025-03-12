@@ -13,6 +13,9 @@ class GildedRose {
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) { // No es Backstage
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) { // No es Sulfuras
+                        if (items[i].quality > 1 && items[i].name.contains("Conjured")) {
+                            items[i].quality = items[i].quality - 1;
+                        }
                         items[i].quality = items[i].quality - 1;
                     }
                 }
@@ -40,23 +43,26 @@ class GildedRose {
                 items[i].sellIn = items[i].sellIn - 1;
             }
 
-            if(items[i].name.contains("Conjured")) {
-                if (items[i].quality > 0) {
-                    items[i].quality = items[i].quality - 1;
-                }
-                if (items[i].sellIn < 0 ) {
-                    items[i].quality = items[i].quality - 1;
-                }
-                if (items[i].quality < 0) {
-                    items[i].quality = 0;
-                }
-            }
+//            if(items[i].name.contains("Conjured")) {
+//                if (items[i].quality > 0) {
+//                    items[i].quality = items[i].quality - 1;
+//                }
+//                if (items[i].sellIn < 0 ) {
+//                    items[i].quality = items[i].quality - 1;
+//                }
+//                if (items[i].quality < 0) {
+//                    items[i].quality = 0;
+//                }
+//            }
 
             if (items[i].sellIn < 0) {
                 if (!items[i].name.equals("Aged Brie")) {
                     if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         if (items[i].quality > 0) {
                             if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                                if (items[i].quality > 1 && items[i].name.contains("Conjured")) {
+                                    items[i].quality = items[i].quality - 1;
+                                }
                                 items[i].quality = items[i].quality - 1;
                             }
                         }
