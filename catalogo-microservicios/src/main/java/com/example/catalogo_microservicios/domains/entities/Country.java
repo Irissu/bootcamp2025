@@ -1,8 +1,9 @@
-package com.example.domains.entities;
+package com.example.catalogo_microservicios.domains.entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
+import com.example.catalogo_microservicios.domains.entities.City;
 import java.util.List;
 
 
