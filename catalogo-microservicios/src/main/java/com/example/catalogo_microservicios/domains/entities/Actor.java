@@ -1,7 +1,14 @@
 package com.example.catalogo_microservicios.domains.entities;
 
 import java.io.Serializable;
+
+import com.example.catalogo_microservicios.domains.core.entities.AbstractEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -13,7 +20,7 @@ import java.util.List;
 @Entity
 @Table(name="actor")
 @NamedQuery(name="Actor.findAll", query="SELECT a FROM Actor a")
-public class Actor implements Serializable {
+public class Actor extends AbstractEntity<Actor> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -22,8 +29,14 @@ public class Actor implements Serializable {
 	private int actorId;
 
 	@Column(name="first_name", nullable=false, length=45)
+	@NotBlank
+	@Size(max = 45, min=2, message = "El nombre no puede tener mas de 45 caracteres")
+	@Pattern(regexp = "^[A-Z]*$", message = "El nombre debe estar en mayúsculas")
 	private String firstName;
 
+	@NotBlank
+	@Size(max = 45, min=2, message = "El apellido no puede tener mas de 45 caracteres")
+	@Pattern(regexp = "^[A-Z]*$", message = "El nombre debe estar en mayúsculas")
 	@Column(name="last_name", nullable=false, length=45)
 	private String lastName;
 
@@ -35,6 +48,13 @@ public class Actor implements Serializable {
 	private List<FilmActor> filmActors;
 
 	public Actor() {
+	}
+
+	public Actor(int actorId, String firstName, String lastName) {
+		super();
+		this.actorId = actorId;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	public int getActorId() {

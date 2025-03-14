@@ -1,6 +1,8 @@
 package com.example.catalogo_microservicios.domains.entities;
 
 import java.io.Serializable;
+
+import com.example.catalogo_microservicios.domains.core.entities.AbstractEntity;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="language")
 @NamedQuery(name="Language.findAll", query="SELECT l FROM Language l")
-public class Language implements Serializable {
+public class Language extends AbstractEntity<Language> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
