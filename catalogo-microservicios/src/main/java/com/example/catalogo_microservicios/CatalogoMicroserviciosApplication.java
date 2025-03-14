@@ -2,6 +2,7 @@ package com.example.catalogo_microservicios;
 
 
 import com.example.catalogo_microservicios.domains.contracts.repositories.ActorRepository;
+import com.example.catalogo_microservicios.domains.contracts.repositories.LanguageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +20,9 @@ public class CatalogoMicroserviciosApplication implements CommandLineRunner {
 	@Autowired
 	private ActorRepository actorRepository;
 
+	@Autowired
+	private LanguageRepository languageRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
 		System.err.println("Aplicación arrancada");
@@ -28,5 +32,9 @@ public class CatalogoMicroserviciosApplication implements CommandLineRunner {
 	private void ejemploDatos() {
 		 // actorRepository.findAll().forEach(System.err::println);
 		 actorRepository.findTop5ByFirstNameStartingWithOrderByLastNameDesc("P").forEach(System.err::println);
+		 languageRepository.findByNameStartingWith("M").forEach(System.err::println);
+		 languageRepository.findTop3By().forEach(System.err::println);
+
+
 	}
 }

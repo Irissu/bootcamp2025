@@ -91,4 +91,9 @@ public class Actor implements Serializable {
 		return filmActor;
 	}
 
+	@Override
+	public String toString() {
+		return "Actor{id=" + actorId + ", firstName='" + firstName + "', lastName='" + lastName + "'}";
+	}
+
 }
