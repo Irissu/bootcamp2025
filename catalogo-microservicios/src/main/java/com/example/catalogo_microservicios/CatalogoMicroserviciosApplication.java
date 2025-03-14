@@ -1,6 +1,7 @@
 package com.example.catalogo_microservicios;
 
-import com.example.catalogo_microservicios.repositories.ActorRepository;
+
+import com.example.catalogo_microservicios.domains.contracts.repositories.ActorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

@@ -1,4 +1,4 @@
-package com.example.catalogo_microservicios.repositories;
+package com.example.catalogo_microservicios.domains.contracts.repositories;
 
 import com.example.catalogo_microservicios.domains.entities.Actor;
 import org.springframework.data.jpa.repository.JpaRepository;
