@@ -6,10 +6,14 @@ import com.example.catalogo_microservicios.domains.entities.Actor;
 import com.example.catalogo_microservicios.exceptions.DuplicatedKeyException;
 import com.example.catalogo_microservicios.exceptions.InvalidDataException;
 import com.example.catalogo_microservicios.exceptions.NotFoundException;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
+@Transactional
 public class ActorServiceImpl implements ActorService {
     private ActorRepository actorRepository;
 
