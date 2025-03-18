@@ -35,11 +35,11 @@ public class PersonaJobConfiguration {
 
     public FlatFileItemReader<PersonaDTO> personaCSVItemReader(String fname) {
         return new FlatFileItemReaderBuilder<PersonaDTO>().name("personaCSVItemReader")
-                //.resource(new FileSystemResource(fname))
-                .resource(new ClassPathResource("input/personas-1.csv"))
+                // .resource(new FileSystemResource(fname))
+                .resource(new ClassPathResource(fname))
                 .linesToSkip(1)
                 .delimited()
-                .names(new String[] { "id", "first_name", "last_name", "email", "gender", "ip_address" })
+                .names(new String[] { "id", "nombre", "apellidos", "correo", "sexo", "ip" })
                 .fieldSetMapper(new BeanWrapperFieldSetMapper<PersonaDTO>() { {
                     setTargetType(PersonaDTO.class);
                 }})
@@ -52,7 +52,7 @@ public class PersonaJobConfiguration {
     public JdbcBatchItemWriter<Persona> personaDBItemWriter(DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Persona>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("INSERT INTO personas (id, first_name, last_name, email, gender, ip_address) VALUES (:id, :first_name, :last_name, :email, :gender, :ip_address)")
+                .sql("INSERT INTO personas VALUES (:id,:nombre,:correo,:ip)")
                 .dataSource(dataSource)
                 .build();
     }

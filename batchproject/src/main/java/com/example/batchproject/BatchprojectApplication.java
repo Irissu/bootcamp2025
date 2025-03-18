@@ -24,11 +24,11 @@ public class BatchprojectApplication implements CommandLineRunner {
 
     @Override
 	public void run(String... args) throws Exception {
-		JobParameters jobParameters = new JobParametersBuilder()
-				.addLong("time", System.currentTimeMillis())
-				.toJobParameters();
-
-		jobLauncher.run(personasJob, jobParameters);
+//		JobParameters jobParameters = new JobParametersBuilder()
+//				.addLong("time", System.currentTimeMillis())
+//				.toJobParameters();
+//
+//		jobLauncher.run(personasJob, jobParameters);
 	}
 
 

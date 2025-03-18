@@ -3,35 +3,23 @@ package com.example.batchproject.models;
 public class PersonaDTO {
 
     private long id;
-    private String first_name;
-    private String last_name;
-    private String email;
-    private String gender;
-    private String ip_address;
+    private String nombre;
+    private String apellidos;
+    private String correo;
+    private String sexo;
+    private String ip;
 
     public PersonaDTO() {
 
     }
 
-    public PersonaDTO(long id) {
+    public PersonaDTO(long id, String nombre, String apellidos, String correo, String sexo, String ip) {
         this.id = id;
-    }
-
-    public PersonaDTO(String first_name, String last_name, String email, String gender, String ip_address) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.gender = gender;
-        this.ip_address = ip_address;
-    }
-
-    public PersonaDTO(long id, String first_name, String last_name, String email, String gender, String ip_address) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.gender = gender;
-        this.ip_address = ip_address;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.sexo = sexo;
+        this.ip = ip;
     }
 
     public long getId() {
@@ -42,55 +30,55 @@ public class PersonaDTO {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
-    public String getGender() {
-        return gender;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
-    public String getIp_address() {
-        return ip_address;
+    public String getIp() {
+        return ip;
     }
 
-    public void setIp_address(String ip_address) {
-        this.ip_address = ip_address;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     @Override
     public String toString() {
-        return "Persona{" +
+        return "PersonaDTO{" +
                 "id=" + id +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
-                ", ip_address='" + ip_address + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", correo='" + correo + '\'' +
+                ", sexo='" + sexo + '\'' +
+                ", ip='" + ip + '\'' +
                 '}';
     }
 }

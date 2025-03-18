@@ -17,9 +17,9 @@ public class PersonaItemProcessor implements ItemProcessor<PersonaDTO, Persona> 
 
     @Override
     public Persona process(PersonaDTO item) throws Exception {
-        if(item.getId() % 2 == 0 && "Male".equals(item.getGender())) return null;
-        Persona result = new Persona(item.getId(), item.getFirst_name(), item.getLast_name(),
-                item.getEmail(), item.getIp_address());
+        if(item.getId() % 2 == 0 && "Male".equals(item.getSexo())) return null;
+        Persona result = new Persona(item.getId(), item.getApellidos() + ", " + item.getNombre(),
+                item.getCorreo(), item.getIp());
         log.info("Procesando: " + item);
         return result;
     }
