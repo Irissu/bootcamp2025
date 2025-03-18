@@ -10,6 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 @SpringBootApplication
 @EntityScan(basePackages = "com.example.catalogo_microservicios.domains.entities")
@@ -18,8 +20,6 @@ public class CatalogoMicroserviciosApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(CatalogoMicroserviciosApplication.class, args);
 	}
-
-
 
 	@Autowired
 	private ActorRepository actorRepository;
@@ -37,8 +37,6 @@ public class CatalogoMicroserviciosApplication implements CommandLineRunner {
 			System.err.println(actor1.getErrorsMessage());
 		}
 		ejemploDatos();
-
-
 	}
 
 	private void ejemploDatos() {
@@ -47,6 +45,7 @@ public class CatalogoMicroserviciosApplication implements CommandLineRunner {
 		 languageRepository.findByNameStartingWith("M").forEach(System.err::println);
 		 languageRepository.findTop3By().forEach(System.err::println);
 		// actorRepository.findAll().forEach(o-> System.err.println(ActorDTO.from(o)));
+		actorRepository.findAll(PageRequest.of(1, 10, Sort.by("actorId"))).forEach(System.err::println);
 
 
 	}
