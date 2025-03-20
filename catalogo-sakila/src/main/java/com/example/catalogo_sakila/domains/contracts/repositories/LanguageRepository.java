@@ -10,4 +10,6 @@ import com.example.catalogo_sakila.domains.entities.Language;
 public interface LanguageRepository extends ListCrudRepository<Language, Integer> {
     List<Language> findAllByOrderByName();
     List<Language> findByLastUpdateGreaterThanEqualOrderByLastUpdate(Timestamp fecha);
+    List<Language> findByNameStartingWith(String letra);
+    List<Language> findTop3By();
 }

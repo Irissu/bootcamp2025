@@ -26,7 +26,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/actors/v1")
+@RequestMapping("/actor/v1")
 @Tag(name = "actor-service", description = "Endpoint de actores")
 public class ActorsResource {
     private ActorService actorService;
@@ -61,6 +61,7 @@ public class ActorsResource {
     record Titulo(int id, String titulo) {	}
 
     @GetMapping(path = "/{id}/pelis")
+    @Operation(summary = "Obtiene un las peliculas de un actor por su ID")
     @Transactional
     public List<Titulo> getPeliculas(@PathVariable int id) throws NotFoundException {
         var item = actorService.getOne(id);
@@ -74,6 +75,7 @@ public class ActorsResource {
 
 
     @PostMapping
+    @Operation(summary = "Crea un actor nuevo")
     @ApiResponse(responseCode = "201", description = "Actor creado")
     public ResponseEntity<Object> create(@Valid @RequestBody ActorDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException {
         var newItem = actorService.add(ActorDTO.from(item));
@@ -83,6 +85,7 @@ public class ActorsResource {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Modifica un actor")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable int id, @Valid @RequestBody ActorDTO item) throws BadRequestException, NotFoundException, InvalidDataException {
         if (item.getActorId() != id) {
@@ -92,6 +95,7 @@ public class ActorsResource {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Elimina un actor")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         actorService.deleteById(id);
