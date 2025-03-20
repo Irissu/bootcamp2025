@@ -9,16 +9,19 @@ import com.example.catalogo_sakila.exceptions.DuplicateKeyException;
 import com.example.catalogo_sakila.exceptions.InvalidDataException;
 import com.example.catalogo_sakila.exceptions.NotFoundException;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/actors")
+@RequestMapping("/actors/v1")
 public class ActorsResource {
     private ActorService actorService;
 
@@ -30,6 +33,11 @@ public class ActorsResource {
     @GetMapping
     public List<ActorDTO> getAll() {
         return actorService.getByProjection(ActorDTO.class);
+    }
+
+    @GetMapping(params = { "page" } )
+    public Page<ActorDTO> getAll(Pageable pageable) {
+        return actorService.getByProjection(pageable, ActorDTO.class);
     }
 
     @GetMapping(path = "/{id}")
