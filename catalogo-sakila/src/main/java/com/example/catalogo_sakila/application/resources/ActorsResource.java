@@ -8,6 +8,11 @@ import com.example.catalogo_sakila.exceptions.BadRequestException;
 import com.example.catalogo_sakila.exceptions.DuplicateKeyException;
 import com.example.catalogo_sakila.exceptions.InvalidDataException;
 import com.example.catalogo_sakila.exceptions.NotFoundException;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +27,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/actors/v1")
+@Tag(name = "actor-service", description = "Endpoint de actores")
 public class ActorsResource {
     private ActorService actorService;
 
@@ -31,16 +37,19 @@ public class ActorsResource {
     }
 
     @GetMapping
+    @Hidden
     public List<ActorDTO> getAll() {
         return actorService.getByProjection(ActorDTO.class);
     }
 
     @GetMapping(params = { "page" } )
+    @Operation(summary = "Obtiene la lista de actores paginada")
     public Page<ActorDTO> getAll(Pageable pageable) {
         return actorService.getByProjection(pageable, ActorDTO.class);
     }
 
     @GetMapping(path = "/{id}")
+    @Operation(summary = "Obtiene un actor por su ID")
     public ActorDTO getOne(@PathVariable int id) throws NotFoundException {
         var item = actorService.getOne(id);
         if (item.isEmpty()) {
@@ -49,7 +58,23 @@ public class ActorsResource {
         return ActorDTO.from(item.get());
     }
 
+    record Titulo(int id, String titulo) {	}
+
+    @GetMapping(path = "/{id}/pelis")
+    @Transactional
+    public List<Titulo> getPeliculas(@PathVariable int id) throws NotFoundException {
+        var item = actorService.getOne(id);
+        if (item.isEmpty()) {
+            throw new NotFoundException("No se encontró el actor con id " + id);
+        }
+        return item.get().getFilmActors().stream()
+                .map(o -> new Titulo(o.getFilm().getFilmId(), o.getFilm().getTitle()))
+                .toList();
+    }
+
+
     @PostMapping
+    @ApiResponse(responseCode = "201", description = "Actor creado")
     public ResponseEntity<Object> create(@Valid @RequestBody ActorDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException {
         var newItem = actorService.add(ActorDTO.from(item));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
