@@ -16,6 +16,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,9 +38,16 @@ public class FilmResource {
     }
 
     @GetMapping
+    @Hidden
     @Operation(summary = "Obtiene la lista de películas sin paginar")
     public List<FilmShortDTO> getAll() {
         return filmService.getByProjection(FilmShortDTO.class);
+    }
+
+    @GetMapping(params = {"page"})
+    @Operation(summary = "Obtiene la lista de películas paginada")
+    public Page<FilmShortDTO> getAll(Pageable pageable) {
+        return filmService.getByProjection(pageable, FilmShortDTO.class);
     }
 
     @GetMapping(path = "/{id}")
