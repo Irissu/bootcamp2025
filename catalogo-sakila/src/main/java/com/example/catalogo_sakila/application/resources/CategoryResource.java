@@ -22,6 +22,7 @@ import java.util.List;
 @RequestMapping("/category/v1")
 @Tag(name = "category-service", description = "Endpoint de categorías")
 public class CategoryResource {
+
     private CategoryService categoryService;
 
     public CategoryResource(CategoryService categoryService) {
@@ -35,7 +36,7 @@ public class CategoryResource {
         return  categoryService.getAll().stream().map(CategoryDTO::from).toList();
     }
 
-    @GetMapping
+    @GetMapping(path = "/{id}")
     @Operation(summary = "Obtiene una categoría por su ID")
     public CategoryDTO getOne(@PathVariable int id) throws NotFoundException {
         var category = categoryService.getOne(id);
