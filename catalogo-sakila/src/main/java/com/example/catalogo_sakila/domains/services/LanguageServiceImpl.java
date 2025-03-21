@@ -6,8 +6,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
-
 import com.example.catalogo_sakila.domains.contracts.repositories.LanguageRepository;
 import com.example.catalogo_sakila.domains.contracts.services.LanguageService;
 import com.example.catalogo_sakila.domains.entities.Language;
@@ -17,20 +15,20 @@ import com.example.catalogo_sakila.exceptions.NotFoundException;
 
 @Service
 public class LanguageServiceImpl implements LanguageService {
-    private LanguageRepository dao;
+    private LanguageRepository languageRepository;
 
-    public LanguageServiceImpl(LanguageRepository dao) {
-        this.dao = dao;
+    public LanguageServiceImpl(LanguageRepository languageRepository) {
+        this.languageRepository = languageRepository;
     }
 
     @Override
     public List<Language> getAll() {
-        return dao.findAll();
+        return languageRepository.findAll();
     }
 
     @Override
     public Optional<Language> getOne(Integer id) {
-        return dao.findById(id);
+        return languageRepository.findById(id);
     }
 
     @Override
@@ -39,9 +37,9 @@ public class LanguageServiceImpl implements LanguageService {
             throw new InvalidDataException("No puede ser nulo");
         if(item.isInvalid())
             throw new InvalidDataException(item.getErrorsMessage(), item.getErrorsFields());
-        if(item.getLanguageId() != 0 && dao.existsById(item.getLanguageId()))
+        if(item.getLanguageId() != 0 && languageRepository.existsById(item.getLanguageId()))
             throw new DuplicateKeyException("Ya existe");
-        return dao.save(item);
+        return languageRepository.save(item);
     }
 
     @Override
@@ -50,25 +48,25 @@ public class LanguageServiceImpl implements LanguageService {
             throw new InvalidDataException("No puede ser nulo");
         if(item.isInvalid())
             throw new InvalidDataException(item.getErrorsMessage(), item.getErrorsFields());
-        if(!dao.existsById(item.getLanguageId()))
+        if(!languageRepository.existsById(item.getLanguageId()))
             throw new NotFoundException();
-        return dao.save(item);
+        return languageRepository.save(item);
     }
 
     @Override
     public void delete(Language item) throws InvalidDataException {
         if(item == null)
             throw new InvalidDataException("No puede ser nulo");
-        dao.delete(item);
+        languageRepository.delete(item);
     }
 
     @Override
     public void deleteById(Integer id) {
-        dao.deleteById(id);
+        languageRepository.deleteById(id);
     }
 
     @Override
     public List<Language> novedades(Timestamp fecha) {
-        return dao.findByLastUpdateGreaterThanEqualOrderByLastUpdate(fecha);
+        return languageRepository.findByLastUpdateGreaterThanEqualOrderByLastUpdate(fecha);
     }
 }
