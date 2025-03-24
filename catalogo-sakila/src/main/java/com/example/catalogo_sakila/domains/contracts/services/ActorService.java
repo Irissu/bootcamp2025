@@ -4,9 +4,10 @@ import com.example.catalogo_sakila.domains.core.contracts.services.ProjectionDom
 import com.example.catalogo_sakila.domains.entities.Actor;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public interface ActorService extends ProjectionDomainService<Actor, Integer> {
     void repartePremios();
-    List<Actor> novedades(Timestamp fecha);
+    List<Actor> novedades(Date fecha);
 }

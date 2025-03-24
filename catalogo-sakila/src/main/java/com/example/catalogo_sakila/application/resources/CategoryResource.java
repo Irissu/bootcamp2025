@@ -51,8 +51,7 @@ public class CategoryResource {
     @ApiResponse(responseCode = "201", description = "Categoría creada")
     public ResponseEntity<Object> create(@Valid @RequestBody CategoryDTO category) throws DuplicateKeyException, InvalidDataException {
         var newCategory = categoryService.add(CategoryDTO.from(category));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCategory.getCategoryId()).toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(CategoryDTO.from(newCategory));
     }
 
     @PutMapping("/{id}")

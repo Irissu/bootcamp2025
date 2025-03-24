@@ -1,6 +1,7 @@
 package com.example.catalogo_sakila.domains.contracts.services;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import com.example.catalogo_sakila.domains.core.contracts.services.ProjectionDomainService;
@@ -8,5 +9,5 @@ import com.example.catalogo_sakila.domains.core.contracts.services.Specification
 import com.example.catalogo_sakila.domains.entities.Film;
 
 public interface FilmService extends ProjectionDomainService<Film, Integer>, SpecificationDomainService<Film, Integer> {
-    List<Film> novedades(Timestamp fecha);
+    List<Film> novedades(Date fecha);
 }

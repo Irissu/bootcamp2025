@@ -86,4 +86,7 @@ public class FilmResource {
     public void delete(@PathVariable int id) {
         filmService.deleteById(id);
     }
+
+    // CONSULTAS FILTRADAS Y CON SPECIFICATIONS
+
 }

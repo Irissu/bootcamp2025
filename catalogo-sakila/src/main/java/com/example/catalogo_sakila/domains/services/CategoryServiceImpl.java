@@ -11,6 +11,7 @@ import com.example.catalogo_sakila.exceptions.InvalidDataException;
 import com.example.catalogo_sakila.exceptions.NotFoundException;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,8 +67,9 @@ public class CategoryServiceImpl implements CategoryService {
         dao.deleteById(id);
     }
 
+
     @Override
-    public List<Category> novedades(Timestamp fecha) {
+    public List<Category> novedades(Date fecha) {
         return dao.findByLastUpdateGreaterThanEqualOrderByLastUpdate(fecha);
     }
 }

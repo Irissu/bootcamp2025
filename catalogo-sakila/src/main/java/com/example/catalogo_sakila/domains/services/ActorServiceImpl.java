@@ -4,6 +4,7 @@ import com.example.catalogo_sakila.domains.contracts.services.ActorService;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -121,7 +122,7 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
-    public List<Actor> novedades(Timestamp fecha) {
+    public List<Actor> novedades(Date fecha) {
         return actorRepository.findByLastUpdateGreaterThanEqualOrderByLastUpdate(fecha);
     }
 }

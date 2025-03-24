@@ -3,6 +3,7 @@ package com.example.catalogo_sakila.domains.services;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,7 +67,7 @@ public class LanguageServiceImpl implements LanguageService {
     }
 
     @Override
-    public List<Language> novedades(Timestamp fecha) {
+    public List<Language> novedades(Date fecha) {
         return languageRepository.findByLastUpdateGreaterThanEqualOrderByLastUpdate(fecha);
     }
 }
