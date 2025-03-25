@@ -50,7 +50,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 /**
  * Ejemplos de conexiones
- * @author Javier
+ * @author Iris de la Mora
  *
  */
 @Observed
@@ -81,7 +81,7 @@ public class CotillaResource {
 	@Autowired
 	@LoadBalanced
 	RestTemplate restTemplateLB;
-
+// con restTemplate
 	@GetMapping(path = "/21/consulta/pelis/rt")
 	public List<PelisDto> getPelisRT(@RequestParam(defaultValue = "http")
 	@Parameter(in = ParameterIn.QUERY, name = "mode", required = false, description = "http: Directo a URL, lb: Balanceo de carga", 
@@ -121,7 +121,7 @@ public class CotillaResource {
 		rslt.add("Final: " + fin + " (" + inicio.until(fin, ChronoUnit.MILLIS) + " ms)");		
 		return rslt;
 	}
-	
+	// con proxy
 	@Autowired
 	CatalogoProxy proxy;
 
