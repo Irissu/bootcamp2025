@@ -1,8 +1,11 @@
 package com.example.catalogo_microservicios.domains.entities;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 /**
@@ -18,20 +21,28 @@ public class FilmActor implements Serializable {
 	@EmbeddedId
 	private FilmActorPK id;
 
-	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
-	private Timestamp lastUpdate;
+	@Column(name="last_update", insertable = false, updatable = false)
+	private Date lastUpdate;
 
 	//bi-directional many-to-one association to Actor
 	@ManyToOne
-	@JoinColumn(name="actor_id", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="actor_id", insertable=false, updatable=false)
+	@JsonManagedReference
 	private Actor actor;
 
 	//bi-directional many-to-one association to Film
 	@ManyToOne
-	@JoinColumn(name="film_id", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="film_id", insertable=false, updatable=false)
+	@JsonManagedReference
 	private Film film;
 
 	public FilmActor() {
+	}
+
+	public FilmActor(Film film, Actor actor) {
+		super();
+		this.film = film;
+		this.actor = actor;
 	}
 
 	public FilmActorPK getId() {
@@ -42,11 +53,11 @@ public class FilmActor implements Serializable {
 		this.id = id;
 	}
 
-	public Timestamp getLastUpdate() {
+	public Date getLastUpdate() {
 		return this.lastUpdate;
 	}
 
-	public void setLastUpdate(Timestamp lastUpdate) {
+	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
@@ -64,6 +75,15 @@ public class FilmActor implements Serializable {
 
 	public void setFilm(Film film) {
 		this.film = film;
+	}
+
+	@PrePersist
+	@PreUpdate
+	void prePersiste() {
+//		System.err.println("prePersiste(): Bug Hibernate");
+		if (id == null) {
+			setId(new FilmActorPK(film.getFilmId(), actor.getActorId()));
+		}
 	}
 
 }

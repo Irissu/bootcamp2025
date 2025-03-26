@@ -1,4 +1,4 @@
 package com.example.catalogo_microservicios.domains.core.validations;
 
-public class GreaterThan {
+public class GreaterThanValidator {
 }
