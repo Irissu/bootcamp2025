@@ -7,8 +7,12 @@ import com.example.catalogo_microservicios.exceptions.DuplicatedKeyException;
 import com.example.catalogo_microservicios.exceptions.InvalidDataException;
 import com.example.catalogo_microservicios.exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +24,33 @@ public class ActorServiceImpl implements ActorService {
     public ActorServiceImpl(ActorRepository actorRepository) { this.actorRepository = actorRepository; } // mejor que autowired
 
     @Override
+    public <T> List<T> getByProjection(Class<T> type) {
+        return actorRepository.findAllBy(type);
+    }
+
+    @Override
+    public <T> Iterable<T> getByProjection(Sort sort, Class<T> type) {
+        return actorRepository.findAllBy(sort, type);
+    }
+
+    @Override
+    public <T> Page<T> getByProjection(Pageable pageable, Class<T> type) {
+        return actorRepository.findAllBy(pageable, type);
+    }
+
+    @Override
     public void repartePremios() {
         System.out.println("Felicidades, ha ganado usted un premio!");
+    }
+
+    @Override
+    public Iterable<Actor> getAll(Sort sort) {
+        return actorRepository.findAll(sort);
+    }
+
+    @Override
+    public Page<Actor> getAll(Pageable pageable) {
+        return actorRepository.findAll(pageable);
     }
 
     @Override
@@ -69,5 +98,10 @@ public class ActorServiceImpl implements ActorService {
     public void deleteById(Integer id) {
         actorRepository.deleteById(id);
 
+    }
+
+    @Override
+    public List<Actor> novedades(Date fecha) {
+        return actorRepository.findByLastUpdateGreaterThanEqualOrderByLastUpdate(fecha);
     }
 }

@@ -20,8 +20,8 @@ import java.util.stream.Stream;
  * 
  */
 @Entity
-@Table(name="film")
-@NamedQuery(name="Film.findAll", query="SELECT f FROM Film f")
+@Table(name = "film")
+@NamedQuery(name = "Film.findAll", query = "SELECT f FROM Film f")
 public class Film extends AbstractEntity<Film> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -120,7 +120,6 @@ public class Film extends AbstractEntity<Film> implements Serializable {
 					.collect(Collectors.toCollection(() -> EnumSet.noneOf(SpecialFeature.class)));
 		}
 	}
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

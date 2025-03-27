@@ -9,6 +9,7 @@ import com.example.catalogo_microservicios.exceptions.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,5 +70,10 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public void deleteById(Integer id) {
         languageRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Language> novedades(Date fecha) {
+        return languageRepository.findByLastUpdateGreaterThanEqualOrderByLastUpdate(fecha);
     }
 }
