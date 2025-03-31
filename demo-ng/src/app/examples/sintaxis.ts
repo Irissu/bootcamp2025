@@ -2,7 +2,7 @@
 /* eslint-disable prefer-const */
 // eslint-disable-next-line @typescript-eslint/no-inferrable-types
 let a : number = 3
-let b = '€2'
+let b = '€3'
 // b=2
 
 let c = a + b
@@ -26,7 +26,7 @@ class Persona {
     public cumpleAños(): void { if(!this.esMayorDeEdad()) this.edad++ }
 }
 
-let o = new Persona(1,'Pepito','Grillo',99);
+let o = new Persona(1,'Iris','de la Mora',99);
 let nom = o?.Nombre?.toUpperCase()
 
 enum Direction { Up = 1, Down, Left, Right, }
