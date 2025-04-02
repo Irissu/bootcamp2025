@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-/* import { LoggerService } from '@my/core'; */
+import { LoggerService } from '../lib/my-core';
 import { DemosComponent } from './examples/demos/demos.component';
 import { AjaxWaitComponent, NotificationComponent, NotificationModalComponent } from './main';
-/* import { NotificationService, NotificationType } from './common-services'; */
-import { HomeComponent } from "./main/home/home.component";
+import { NotificationService, NotificationType } from './common-services'; 
+import { HomeComponent } from './main';
 import { HeaderComponent } from "./main/header/header.component";
 import { FooterComponent } from "./main/footer/footer.component";
 
