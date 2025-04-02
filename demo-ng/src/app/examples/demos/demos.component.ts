@@ -1,13 +1,18 @@
 
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, computed, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Unsubscribable } from 'rxjs';
+import { CapitalizePipe, ElipsisPipe } from '../../../lib/my-core/pipes/cadenas.pipe';
 import { NotificationService, NotificationType } from '../../common-services';
+import { SizerComponent } from '../../../lib/my-core/components/sizer.component';
+import { LoggerService } from '../../../lib/my-core';
+import { CardComponent, FormButtonsComponent } from '../../common-components';
+import GraficoSvgComponent from '../grafico-svg/grafico-svg.component';
 
 @Component({
   selector: 'app-demos',
-  imports: [FormsModule, CommonModule, ],
+  imports: [FormsModule, CommonModule, ElipsisPipe, CapitalizePipe, SizerComponent, FormButtonsComponent, CardComponent, GraficoSvgComponent, ],
   templateUrl: './demos.component.html',
   styleUrl: './demos.component.css'
 })
@@ -17,8 +22,8 @@ export class DemosComponent implements OnInit, OnDestroy {
   public readonly fontSize = signal<number>(24)
   public readonly listado = signal([
     { id: 1, nombre: 'Madrid'},
-    { id: 2, nombre: 'GUADALAJARA'},
-    { id: 3, nombre: 'valencia'},
+    { id: 2, nombre: 'OVIEDO'},
+    { id: 3, nombre: 'barcelona'},
     { id: 4, nombre: 'ciudad Real'},
   ])
   public readonly idProvincia = signal<number>(2)
@@ -28,7 +33,8 @@ export class DemosComponent implements OnInit, OnDestroy {
   public readonly invisible = computed<boolean>(() => !this.visible())
   public readonly estetica = signal({ importante: true, urgente: true, error: false })
 
-  constructor(public vm: NotificationService) { }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  constructor(public vm: NotificationService, out: LoggerService) { }
 
   public get Fecha(): string { return this.fecha.toISOString(); }
   public set Fecha(value: string) {
@@ -59,15 +65,15 @@ export class DemosComponent implements OnInit, OnDestroy {
   calcula(a: number, b:number) { return a + b; }
 
 
-  // private suscriptor: Unsubscribable | undefined;
-  private suscriptor?: Unsubscribable;
+  private suscriptor: Unsubscribable | undefined;
+  //private suscriptor?: Unsubscribable;
 
   ngOnInit(): void {
     this.suscriptor = this.vm.Notificacion.subscribe({
       next: n => {
         if (n.Type !== NotificationType.error) { return; }
-        // window.alert(`Suscripción: ${n.Message}`);
-        // this.vm.remove(this.vm.Listado.length - 1);
+        window.alert(`Suscripción: ${n.Message}`);
+        this.vm.remove(this.vm.Listado.length - 1);
       },
       complete: () => this.suscriptor?.unsubscribe()
     });
