@@ -11,8 +11,9 @@
     "secure": false,
     "logLevel": "debug"
   },
-  "/api": {
-    "target": "http://localhost:4321",
+  "/api/actores": {
+    "target": "http://localhost:8080",
+    "pathRewrite": { "^/api/actores": "/actores" },
     "secure": false,
     "logLevel": "debug"
   }

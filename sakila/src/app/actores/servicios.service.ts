@@ -42,7 +42,7 @@ export abstract class RESTDAOService<T, K> {
 export class ActoresDAOService extends RESTDAOService<any, any> {
 
   constructor() { 
-    super('actores',  { context: new HttpContext().set(AUTH_REQUIRED, true) });
+    super('/v1');
    }
 
   }
