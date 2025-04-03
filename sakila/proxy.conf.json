@@ -16,5 +16,11 @@
     "pathRewrite": { "^/api/actores": "/actores" },
     "secure": false,
     "logLevel": "debug"
+  },
+  "/api/language": {
+    "target": "http://localhost:8080",
+    "pathRewrite": { "^/api/language": "/language" },
+    "secure": false,
+    "logLevel": "debug"
   }
 }

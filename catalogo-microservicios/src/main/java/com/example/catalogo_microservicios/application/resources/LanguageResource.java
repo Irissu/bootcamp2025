@@ -41,7 +41,7 @@ public class LanguageResource {
         this.languageService = languageService;
     }
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     @Hidden
     public List<LanguageDTO> getAll() {
         return languageService.getAll().stream()
@@ -49,7 +49,7 @@ public class LanguageResource {
                 .toList();
     }
 
-    @GetMapping(params = { "page" } )
+    @GetMapping(params = { "page" }, produces = "application/json" )
     @Operation(summary = "Obtiene la lista de idiomas paginada")
     public Page<LanguageDTO> getAll(Pageable pageable) {
         return languageService.getAll().stream()

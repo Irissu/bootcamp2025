@@ -42,7 +42,7 @@ export abstract class RESTDAOService<T, K> {
 export class IdiomasDAOService extends RESTDAOService<any, any> {
 
   constructor() { 
-    super('idiomas/v1');
+    super('language/v1');
    }
 
   }
@@ -55,7 +55,7 @@ export class IdiomasViewModelService {
     protected listado: any[] = [];
     protected elemento: any = {};
     protected idOriginal: any = null;
-    protected listURL = '/idiomas';
+    protected listURL = '/language';
 
     constructor(
       protected notify: NotificationService,
