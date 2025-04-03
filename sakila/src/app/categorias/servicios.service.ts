@@ -42,7 +42,7 @@ export abstract class RESTDAOService<T, K> {
 export class ActoresDAOService extends RESTDAOService<any, any> {
 
   constructor() { 
-    super('actores/v1');
+    super('/v1');
    }
 
   }

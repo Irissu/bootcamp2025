@@ -39,10 +39,10 @@ export abstract class RESTDAOService<T, K> {
 @Injectable({
   providedIn: 'root'
 })
-export class ActoresDAOService extends RESTDAOService<any, any> {
+export class IdiomasDAOService extends RESTDAOService<any, any> {
 
   constructor() { 
-    super('actores/v1');
+    super('idiomas/v1');
    }
 
   }
@@ -50,17 +50,17 @@ export class ActoresDAOService extends RESTDAOService<any, any> {
 @Injectable({
   providedIn: 'root'
 })
-export class ActoresViewModelService {
+export class IdiomasViewModelService {
     protected modo: ModoCRUD = 'list';
     protected listado: any[] = [];
     protected elemento: any = {};
     protected idOriginal: any = null;
-    protected listURL = '/actores';
+    protected listURL = '/idiomas';
 
     constructor(
       protected notify: NotificationService,
       protected out: LoggerService,
-      protected dao: ActoresDAOService, 
+      protected dao: IdiomasDAOService, 
       public auth: AuthService, 
       protected router: Router, 
       private navigation: NavigationService
@@ -115,9 +115,6 @@ export class ActoresViewModelService {
 
         // comandos para cerrar la vista de detalle y/o formulario
         public cancel(): void {
-          /*this.elemento = {};
-          this.idOriginal = null;
-          this.list(); */
           this.clear()
           this.router.navigateByUrl(this.listURL);
           }
@@ -152,7 +149,6 @@ export class ActoresViewModelService {
               let msg = ''
               switch (err.status) {
               case 0: msg = err.message; break;
-              /*case 404: msg = `ERROR ${err.status}: ${err.statusText}`; break;*/
               case 404: this.router.navigateByUrl('/404.html'); return;
               default:
               msg = `ERROR ${err.status}: ${err.error?.['title'] ??
@@ -163,5 +159,3 @@ export class ActoresViewModelService {
               }
 
 }
-  
-
