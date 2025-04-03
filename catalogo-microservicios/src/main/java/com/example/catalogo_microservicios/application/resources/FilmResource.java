@@ -73,6 +73,12 @@ public class FilmResource {
         return FilmDetailsDTO.from(film.get());
     }
 
+    @GetMapping(path = "/contenido-adicional")
+    @Operation(summary = "Listado del contenido adicional posible")
+    public List<String> getSpecialFeatures() {
+        return List.of(Film.SpecialFeature.values()).stream().map(o -> o.getValue()).toList();
+    }
+
     @PostMapping
     @Operation(summary = "Crea una película nueva")
     @ApiResponse(responseCode = "201", description = "película creada")

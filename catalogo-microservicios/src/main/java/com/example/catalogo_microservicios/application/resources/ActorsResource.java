@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,6 +51,7 @@ public class ActorsResource {
 //    }
 
     @GetMapping(path = "/v1")
+    @SecurityRequirement(name = "bearerAuth")
     public List<?> getAll(@RequestParam(required = false, defaultValue = "largo") String modo) {
         if("short".equals(modo))
             return (List<?>) actorService.getByProjection(Sort.by("firstName", "lastName"), ActorShort.class);

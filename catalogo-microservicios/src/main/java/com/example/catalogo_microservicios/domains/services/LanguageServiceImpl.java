@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class LanguageServiceImpl implements LanguageService {
     private LanguageRepository languageRepository;
 
@@ -71,6 +70,7 @@ public class LanguageServiceImpl implements LanguageService {
     public void deleteById(Integer id) {
         languageRepository.deleteById(id);
     }
+
 
     @Override
     public List<Language> novedades(Date fecha) {
