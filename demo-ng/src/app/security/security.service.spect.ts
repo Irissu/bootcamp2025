@@ -46,7 +46,7 @@ describe('AuthService', () => {
 });
 
 describe('LoginService ', () => {
-  const apiURL = environment.securityApiURL
+  const apiURL = environment.securityapiURL
 
   let service: LoginService;
   let auth: AuthService
@@ -268,7 +268,7 @@ describe('AuthInterceptor', () => {
     }));
   });
   describe('KO', () => {
-    const apiURL = environment.securityApiURL + 'login/refresh'
+    const apiURL = environment.securityapiURL + 'login/refresh'
     const errorBody = {
       "type": "ApplicationError",
       "status": 401,

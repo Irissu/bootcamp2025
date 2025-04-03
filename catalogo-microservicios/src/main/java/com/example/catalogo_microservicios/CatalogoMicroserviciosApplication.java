@@ -5,15 +5,39 @@ import com.example.catalogo_microservicios.domains.contracts.repositories.ActorR
 import com.example.catalogo_microservicios.domains.contracts.repositories.LanguageRepository;
 import com.example.catalogo_microservicios.domains.entities.Actor;
 import com.example.catalogo_microservicios.domains.entities.dtos.ActorDTO;
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
+@EnableSpringDataWebSupport(pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO)
+@EnableAspectJAutoProxy
 @SpringBootApplication
+@OpenAPIDefinition(
+		info = @Info(
+				title = "Microservicio: Catalogo de peliculas",
+				version = "1.0",
+				description = "Ejemplo de Microservicio utilizando la base de datos **Sakila**.",
+				license = @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0.html"),
+				contact = @Contact(name = "Javier Martín", url = "https://github.com/jmagit", email = "support@example.com")
+		),
+		externalDocs = @ExternalDocumentation(description = "Documentación del proyecto", url = "https://github.com/jmagit/BOOT20250305/tree/main/catalogo")
+)
+@SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
+@EnableFeignClients
 @EntityScan(basePackages = "com.example.catalogo_microservicios.domains.entities")
 public class CatalogoMicroserviciosApplication implements CommandLineRunner {
 

@@ -13,7 +13,7 @@ import { FormButtonsComponent } from "../../common-components/form-buttons/form-
 import { ErrorMessagePipe } from '../../../lib/my-core/pipes/cadenas.pipe';
 
 export abstract class RESTDAOService<T, K> {
-  protected baseUrl = environment.apiUrl;
+  protected baseUrl = environment.apiURL;
   protected http = inject(HttpClient)
 
   constructor(entidad: string, protected option = {}) {

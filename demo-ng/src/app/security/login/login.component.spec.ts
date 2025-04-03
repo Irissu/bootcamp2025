@@ -13,7 +13,7 @@ import { provideLocationMocks } from '@angular/common/testing';
 import { provideRouter } from '@angular/router';
 
 describe('LoginComponent', () => {
-  const apiURL = environment.securityApiURL
+  const apiURL = environment.securityapiURL
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let loginSrv: LoginService
@@ -95,7 +95,7 @@ describe('LoginComponent', () => {
 });
 
 describe('LoginFormComponent', () => {
-  const apiURL = environment.securityApiURL
+  const apiURL = environment.securityapiURL
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
   let loginSrv: LoginService

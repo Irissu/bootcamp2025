@@ -89,7 +89,7 @@ export class LoginService {
   login(usr: string, pwd: string) {
     if (this.auth.isAuthenticated) this.auth.logout();
     return new Observable(observable =>
-      this.http.post<LoginResponse>(environment.securityApiURL + 'login', { username: usr, password: pwd })
+      this.http.post<LoginResponse>(environment.securityapiURL + 'login', { username: usr, password: pwd })
         .subscribe({
           next: data => {
             if (data.success === true) {
@@ -103,7 +103,7 @@ export class LoginService {
   }
   refresh() {
     if (this.auth.isAuthenticated) {
-      return this.http.post<LoginResponse>(environment.securityApiURL + 'login/refresh', { token: this.auth.RefreshToken })
+      return this.http.post<LoginResponse>(environment.securityapiURL + 'login/refresh', { token: this.auth.RefreshToken })
         .pipe(
           switchMap(data => {
             if (data.success === true) {
@@ -257,7 +257,7 @@ export class User {
 
 @Injectable({ providedIn: 'root' })
 export class RegisterUserDAO {
-  private baseUrl = environment.securityApiURL + 'register ';
+  private baseUrl = environment.securityapiURL + 'register ';
   private options = { withCredentials: true };
 
   constructor(private http: HttpClient) { }
